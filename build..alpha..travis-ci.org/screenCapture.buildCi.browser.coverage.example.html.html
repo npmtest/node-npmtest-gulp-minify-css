@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
+<html lang="en"><head>
     <title>Code coverage report for node-npmtest-gulp-minify-css/gulp-minify-css/index.js</title>
     <meta charset="utf-8">
     <style>
@@ -210,11 +208,11 @@
         
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
-    <div class="path"><a href="../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-gulp-minify-css/gulp-minify-css/</a> &#187; index.js</div>
+    <div class="path"><a href="../../index.html">All files</a> » <a href="index.html">node-npmtest-gulp-minify-css/gulp-minify-css/</a> » index.js</div>
 </div>
 <div class="body">
 <pre><table class="coverage">
-<tr><td class="line-count">1
+<tbody><tr><td class="line-count">1
 2
 3
 4
@@ -379,77 +377,78 @@ var PluginError = require('gulp-util').PluginError;
 var Transform = require('readable-stream/transform');
 var VinylBufferStream = require('vinyl-bufferstream');
 &nbsp;
-module.exports = <span class="fstat-no" title="function not covered" >function gulpMinifyCSS(options) {</span>
-<span class="cstat-no" title="statement not covered" >  options = options || {};</span>
+module.exports = <span class="fstat-no" title="function not covered">function gulpMinifyCSS(options) {</span>
+<span class="cstat-no" title="statement not covered">  options = options || {};</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return new Transform({</span>
+<span class="cstat-no" title="statement not covered">  return new Transform({</span>
     objectMode: true,
-    transform: <span class="fstat-no" title="function not covered" >function modifyContents(file, enc, cb) {</span>
-<span class="cstat-no" title="statement not covered" >      var run = new VinylBufferStream(<span class="fstat-no" title="function not covered" >function(buf, done) {</span></span>
-<span class="cstat-no" title="statement not covered" >        var fileOptions = objectAssign({target: file.path}, options);</span>
+    transform: <span class="fstat-no" title="function not covered">function modifyContents(file, enc, cb) {</span>
+<span class="cstat-no" title="statement not covered">      var run = new VinylBufferStream(<span class="fstat-no" title="function not covered">function(buf, done) {</span></span>
+<span class="cstat-no" title="statement not covered">        var fileOptions = objectAssign({target: file.path}, options);</span>
 &nbsp;
         // https://github.com/jakubpawlowicz/clean-css/blob/v3.3.0/bin/cleancss#L83-L84
-<span class="cstat-no" title="statement not covered" >        if (fileOptions.relativeTo === undefined &amp;&amp; (fileOptions.root || file.path)) {</span>
-<span class="cstat-no" title="statement not covered" >          fileOptions.relativeTo = path.dirname(path.resolve(options.root || file.path));</span>
+<span class="cstat-no" title="statement not covered">        if (fileOptions.relativeTo === undefined &amp;&amp; (fileOptions.root || file.path)) {</span>
+<span class="cstat-no" title="statement not covered">          fileOptions.relativeTo = path.dirname(path.resolve(options.root || file.path));</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if ((options.sourceMap === true || options.sourceMap === undefined) &amp;&amp; file.sourceMap) {</span>
-<span class="cstat-no" title="statement not covered" >          fileOptions.sourceMap = JSON.stringify(file.sourceMap);</span>
+<span class="cstat-no" title="statement not covered">        if ((options.sourceMap === true || options.sourceMap === undefined) &amp;&amp; file.sourceMap) {</span>
+<span class="cstat-no" title="statement not covered">          fileOptions.sourceMap = JSON.stringify(file.sourceMap);</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        var cssFile;</span>
+<span class="cstat-no" title="statement not covered">        var cssFile;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        if (file.path) {</span>
-<span class="cstat-no" title="statement not covered" >          cssFile = {};</span>
-<span class="cstat-no" title="statement not covered" >          cssFile[file.path] = {styles: buf.toString()};</span>
+<span class="cstat-no" title="statement not covered">        if (file.path) {</span>
+<span class="cstat-no" title="statement not covered">          cssFile = {};</span>
+<span class="cstat-no" title="statement not covered">          cssFile[file.path] = {styles: buf.toString()};</span>
         } else {
-<span class="cstat-no" title="statement not covered" >          cssFile = buf.toString();</span>
+<span class="cstat-no" title="statement not covered">          cssFile = buf.toString();</span>
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        new CleanCSS(fileOptions).minify(cssFile, <span class="fstat-no" title="function not covered" >function(errors, css) {</span></span>
-<span class="cstat-no" title="statement not covered" >          if (errors) {</span>
-<span class="cstat-no" title="statement not covered" >            done(errors.join(' '));</span>
-<span class="cstat-no" title="statement not covered" >            return;</span>
+<span class="cstat-no" title="statement not covered">        new CleanCSS(fileOptions).minify(cssFile, <span class="fstat-no" title="function not covered">function(errors, css) {</span></span>
+<span class="cstat-no" title="statement not covered">          if (errors) {</span>
+<span class="cstat-no" title="statement not covered">            done(errors.join(' '));</span>
+<span class="cstat-no" title="statement not covered">            return;</span>
           }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >          if (css.sourceMap) {</span>
-<span class="cstat-no" title="statement not covered" >            var map = JSON.parse(css.sourceMap);</span>
-<span class="cstat-no" title="statement not covered" >            map.file = path.relative(file.base, file.path);</span>
-<span class="cstat-no" title="statement not covered" >            map.sources = map.sources.map(<span class="fstat-no" title="function not covered" >function(src) {</span></span>
-<span class="cstat-no" title="statement not covered" >              if (/^(https?:)?\/\//.test(src)) {</span>
-<span class="cstat-no" title="statement not covered" >                return src;</span>
+<span class="cstat-no" title="statement not covered">          if (css.sourceMap) {</span>
+<span class="cstat-no" title="statement not covered">            var map = JSON.parse(css.sourceMap);</span>
+<span class="cstat-no" title="statement not covered">            map.file = path.relative(file.base, file.path);</span>
+<span class="cstat-no" title="statement not covered">            map.sources = map.sources.map(<span class="fstat-no" title="function not covered">function(src) {</span></span>
+<span class="cstat-no" title="statement not covered">              if (/^(https?:)?\/\//.test(src)) {</span>
+<span class="cstat-no" title="statement not covered">                return src;</span>
               }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >              return path.relative(file.base, src);</span>
+<span class="cstat-no" title="statement not covered">              return path.relative(file.base, src);</span>
             });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >            applySourceMap(file, map);</span>
+<span class="cstat-no" title="statement not covered">            applySourceMap(file, map);</span>
           }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >          done(null, new Buffer(css.styles));</span>
+<span class="cstat-no" title="statement not covered">          done(null, new Buffer(css.styles));</span>
         });
       });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      var self = this;</span>
+<span class="cstat-no" title="statement not covered">      var self = this;</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      run(file, <span class="fstat-no" title="function not covered" >function(err, contents) {</span></span>
-<span class="cstat-no" title="statement not covered" >        if (err) {</span>
-<span class="cstat-no" title="statement not covered" >          self.emit('error', new PluginError('gulp-minify-css', err, {fileName: file.path}));</span>
+<span class="cstat-no" title="statement not covered">      run(file, <span class="fstat-no" title="function not covered">function(err, contents) {</span></span>
+<span class="cstat-no" title="statement not covered">        if (err) {</span>
+<span class="cstat-no" title="statement not covered">          self.emit('error', new PluginError('gulp-minify-css', err, {fileName: file.path}));</span>
         } else {
-<span class="cstat-no" title="statement not covered" >          file.contents = contents;</span>
-<span class="cstat-no" title="statement not covered" >          self.push(file);</span>
+<span class="cstat-no" title="statement not covered">          file.contents = contents;</span>
+<span class="cstat-no" title="statement not covered">          self.push(file);</span>
         }
-<span class="cstat-no" title="statement not covered" >        cb();</span>
+<span class="cstat-no" title="statement not covered">        cb();</span>
       });
     }
   });
 };
 &nbsp;
 &nbsp;</pre></td></tr>
-</table></pre>
+</tbody></table></pre>
 </div>
 <div class="footer">
     <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 15 2017 22:06:08 GMT+0000 (UTC)</div>
 </div>
-</body>
-</html>
+
+
+</body></html>
